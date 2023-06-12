@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Employee</title>
+    <style>
+        #d{
+            display: flex;
+            flex-wrap: wrap;
+
+        }
+        .card {
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          width: 275px;
+          /* height: 100px; */
+          font-family: arial;
+          margin: 10px;
+          
+        }
+        
+        .title {
+          color: grey;
+          font-size: 18px;
+        }
+        
+        button {
+          border: none;
+          outline: 0;
+          display: inline-block;
+          padding: 8px;
+          color: white;
+          background-color: #000;
+          text-align: center;
+          cursor: pointer;
+          width: 100%;
+          font-size: 18px;
+        }
+        
+        a {
+          text-decoration: none;
+          font-size: 22px;
+          color: black;
+        }
+        
+        button:hover, a:hover {
+          opacity: 0.7;
+        }
+        </style>
+</head>
+<body>
+    <h2 style="text-align:center">All Employees</h2>
+    <div id="d">
+        {% for employee in present_employee %}
+        <div class="card">
+        <img src="{{MEDIA_URL}}{{employee.employee_detail.image.url}}" alt="John" style="width: 275px; height:350px ">
+        <h1>{{employee.employee_detail.user.first_name}}</h1>
+        <p class="title">{{employee.employee_detail.emp_id}}</p>
+        <p>{{employee.employee_detail.designation}}</p>
+        <div style="margin: 24px 0;">
+            <a href="#"><i class="fa fa-dribbble"></i></a> 
+            <a href="#"><i class="fa fa-twitter"></i></a>  
+            <a href="#"><i class="fa fa-linkedin"></i></a>  
+            <a href="#"><i class="fa fa-facebook"></i></a> 
+        </div>
+        <p><button>More Info</button></p>
+        </div>
+        {% endfor %}
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>In Office Employee</title>
+    <style>
+        #customers {
+          font-family: Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        #customers td, #customers th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #04AA6D;
+          color: white;
+
+
+        }
+        input{
+        background-color: green;
+        color: white;
+        }
+        .search{
+        background-color: blue;
+        width: 200px;
+        height: 20px;
+        text: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>List of Present Employee</h1>
+    <form action="{% url 'filter' %}" method="post">
+        {% csrf_token %}
+        <input type="date" name="date_from" placeholder="Search by Date(YYYY-MM-DD)" class="search">
+        <input type="date" name="date_to" placeholder="Search by Date(YYYY-MM-DD)" class="search">
+        <input type="submit" value="Filter">
+    </form>
+    <br><br>
+<table id="customers">
+  <tr>
+
+    <th>ID</th>
+    <th>Employee Name</th>
+    <th>Emp. Id</th>
+    <th>In Time</th>
+    <th>Out Time</th>
+
+  </tr>
+    {% for present_employee in present_employees %}
+  <tr>
+    <td>{{present_employee.id}}</td>
+    <td>{{present_employee.employee_detail.user.first_name}}</td>
+    <td>{{present_employee.employee_detail.emp_id}}</td>
+    <td>{{present_employee.in_time}}</td>
+    {% if present_employee.out_time == None %}
+        <td>Not leave office yet</td>
+    {% else %}
+        <td>{{present_employee.out_time}}</td>
+    {% endif %}
+
+  </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>
